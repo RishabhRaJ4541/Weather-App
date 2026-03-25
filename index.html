@@ -30,6 +30,7 @@
     overflow-x: hidden;
   }
 
+
   #bg-canvas {
     position: fixed;
     inset: 0;
@@ -46,8 +47,6 @@
     align-items: center;
     padding: 2.5rem 1.25rem 3rem;
   }
-
- 
   .hero {
     text-align: center;
     margin-bottom: 2.8rem;
@@ -56,8 +55,8 @@
   .logo {
     font-family: 'Playfair Display', serif;
     font-weight: 900;
-    font-size: clamp(3.8rem, 14vw, 7.5rem);
-    letter-spacing: 0.08em;
+    font-size: clamp(2.4rem, 10vw, 7.5rem);
+    letter-spacing: clamp(0.2em, 3vw, 0.55em);
     line-height: 1;
     background: linear-gradient(135deg, #e0f2fe 20%, #7dd3fc 55%, #38bdf8 100%);
     -webkit-background-clip: text;
@@ -65,9 +64,9 @@
     background-clip: text;
     text-shadow: none;
     position: relative;
-    display: inline-block;
-    animation: logoGlow 3s ease-in-out infinite alternate;
+    display: block;
     white-space: nowrap;
+    animation: logoGlow 3s ease-in-out infinite alternate;
   }
 
   @keyframes logoGlow {
@@ -75,7 +74,7 @@
     to   { filter: drop-shadow(0 0 38px rgba(56,189,248,.7)); }
   }
 
- 
+  /* ← the requested gap lives here */
   .tagline {
     margin-top: 1.6rem;
     font-family: 'DM Sans', sans-serif;
@@ -100,10 +99,11 @@
     border: 1px solid var(--card-border);
     border-radius: 60px;
     backdrop-filter: var(--blur);
-    padding: 0 1rem 0 1.5rem;
-    gap: 0.5rem;
+    padding: 0.5rem 0.5rem 0.5rem 1rem;
+    gap: 0.35rem;
     transition: border-color .3s, box-shadow .3s;
-    height: 56px;
+    width: 100%;
+    overflow: hidden;
   }
 
   .search-box:focus-within {
@@ -113,14 +113,14 @@
 
   .search-box input {
     flex: 1;
+    min-width: 0;
     background: transparent;
     border: none;
     outline: none;
     color: var(--text);
     font-family: 'DM Sans', sans-serif;
-    font-size: 1rem;
-    padding: 1rem 0;
-    height: 100%;
+    font-size: 0.95rem;
+    padding: 0.5rem 0;
   }
 
   .search-box input::placeholder { color: var(--muted); }
@@ -129,42 +129,40 @@
     background: linear-gradient(135deg, #38bdf8, #0ea5e9);
     border: none;
     border-radius: 50px;
-    padding: 0.55rem 1.25rem;
-    height: 40px;
+    padding: 0.55rem 1.1rem;
     color: #fff;
     font-family: 'DM Sans', sans-serif;
-    font-size: 0.9rem;
+    font-size: 0.85rem;
     font-weight: 500;
     cursor: pointer;
     transition: transform .2s, box-shadow .2s;
     white-space: nowrap;
+    flex-shrink: 0;
+    height: 38px;
     display: flex;
     align-items: center;
-    justify-content: center;
-    flex-shrink: 0;
   }
 
   .search-btn:hover { transform: scale(1.06); box-shadow: 0 4px 20px rgba(56,189,248,.4); }
-
 
   .loc-btn {
     background: none;
     border: none;
     cursor: pointer;
-    padding: 0.45rem;
+    padding: 0.3rem;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 50%;
     transition: background .2s, transform .2s;
     flex-shrink: 0;
-    height: 44px;
-    width: 44px;
+    width: 34px;
+    height: 34px;
   }
 
   .loc-btn:hover { background: rgba(56,189,248,.15); transform: scale(1.12); }
 
-  .loc-btn svg { display: block; }
+  .loc-btn svg { display: block; width: 20px; height: 20px; }
 
   .loc-btn.locating { animation: pulse-loc 1s ease-in-out infinite; }
 
@@ -178,8 +176,9 @@
     align-items: center;
     justify-content: center;
     flex-shrink: 0;
-    margin-right: 0.1rem;
   }
+
+  .search-prefix-icon svg { width: 18px; height: 18px; }
 
   .suggestions {
     position: absolute;
@@ -235,7 +234,7 @@
     to   { opacity:1; transform:translateY(0)  scale(1);    }
   }
 
-  /* top row */
+
   .card-top {
     display: flex;
     justify-content: space-between;
@@ -290,7 +289,7 @@
     50%    { transform: translateY(-8px); }
   }
 
-  /* grid stats */
+
   .stats-grid {
     display: grid;
     grid-template-columns: repeat(2, 1fr);
@@ -317,6 +316,7 @@
   .stat-val  { font-size: 1.15rem; font-weight: 500; }
   .stat-lbl  { font-size: 0.72rem; color: var(--muted); letter-spacing: 0.06em; text-transform: uppercase; }
 
+
   .aqi-row {
     margin-top: 1.2rem;
     background: rgba(255,255,255,0.04);
@@ -333,7 +333,6 @@
 
   .aqi-val { font-size: 0.9rem; font-weight: 500; margin-top: 0.4rem; }
 
-  
   .status-msg {
     width: 100%;
     max-width: 560px;
@@ -347,6 +346,7 @@
   .status-msg.show { display: block; }
   .status-msg.error { background: rgba(239,68,68,.15); border: 1px solid rgba(239,68,68,.3); color: #fca5a5; }
   .status-msg.loading { color: var(--muted); }
+
 
   .footer {
     margin-top: auto;
@@ -364,11 +364,11 @@
 
 <div class="app">
   <div class="hero">
-    <div class="logo">SKYE</div>
+    <div class="logo">S K Y E</div>
     <div class="tagline">What's the weather like today?</div>
   </div>
 
-  
+
   <div class="search-wrap">
     <div class="search-box">
     
@@ -385,7 +385,6 @@
 
       <input id="search-input" type="text" placeholder="Search a city or place…" autocomplete="off" />
 
-    
       <button class="loc-btn" id="loc-btn" title="Use my current location">
         <svg width="22" height="22" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
           <path d="M12 2C8.13 2 5 5.13 5 9c0 5.25 7 13 7 13s7-7.75 7-13c0-3.87-3.13-7-7-7z" stroke="#7dd3fc" stroke-width="1.7" fill="rgba(125,211,252,0.12)" stroke-linejoin="round"/>
@@ -402,9 +401,11 @@
     <div class="suggestions" id="suggestions"></div>
   </div>
 
+
   <div class="status-msg loading" id="loading-msg">⏳ Fetching weather…</div>
   <div class="status-msg error" id="error-msg"></div>
 
+ 
   <div class="weather-card" id="weather-card">
     <div class="card-top">
       <div>
@@ -438,7 +439,6 @@
   <div class="footer">SKYE · Powered by WeatherAPI</div>
 </div>
 
-
 <script>
 
 (function(){
@@ -455,7 +455,6 @@
   window.addEventListener('resize', resize);
   resize();
 
- 
   function mkParticle(){
     const types = {
       clear : { r:1.5, vx:0.2, vy:0.15, alpha:.55, color:'#7dd3fc' },
@@ -479,7 +478,7 @@
     particles = Array.from({length:n}, mkParticle);
   }
 
-
+ 
   function drawStars(){
     for(let i=0;i<80;i++){
       const x = (i*137.5) % W;
@@ -491,6 +490,7 @@
       ctx.fill();
     }
   }
+
 
   function drawOrb(){
     const x = W*.80, y = H*.18, r = 55;
@@ -509,6 +509,7 @@
     ctx.fill();
   }
 
+  
   let auroraT = 0;
   function drawAurora(){
     auroraT += 0.004;
@@ -531,7 +532,6 @@
     }
   }
 
-  
   let flashTimer = 0;
   function maybeFlash(){
     flashTimer++;
@@ -545,7 +545,6 @@
   function loop(){
     ctx.clearRect(0,0,W,H);
 
-    
     const skyGrad = ctx.createLinearGradient(0,0,0,H);
     skyGrad.addColorStop(0,'#020817');
     skyGrad.addColorStop(1,'#0f172a');
@@ -590,7 +589,6 @@
   initParticles(120);
   loop();
 
-  
   window.setWeatherAnim = function(condition){
     const c = condition.toLowerCase();
     if(c.includes('rain')||c.includes('drizzle')) animType='rain';
@@ -601,8 +599,6 @@
     initParticles(animType==='cloudy'?25:animType==='rain'?200:120);
   };
 })();
-
-
 
 const API_KEY = '9740f6251d514964a0082906262503';
 const BASE    = 'https://api.weatherapi.com/v1';
@@ -616,7 +612,7 @@ const errMsg  = document.getElementById('error-msg');
 
 let sugDebounce;
 
-
+/* ── suggestions ── */
 input.addEventListener('input', ()=>{
   clearTimeout(sugDebounce);
   const q = input.value.trim();
@@ -719,7 +715,7 @@ function populateCard(d){
   document.getElementById('cloud').textContent    = cur.cloud + '%';
   document.getElementById('pressure').textContent = cur.pressure_mb + ' hPa';
 
- 
+  
   const aqi = d.current?.air_quality?.['us-epa-index'];
   if(aqi){
     const aqiColors = ['','#22c55e','#84cc16','#eab308','#f97316','#ef4444','#7c3aed'];
@@ -748,6 +744,7 @@ function showError(msg){
   errMsg.textContent = '⚠️ ' + msg;
   errMsg.classList.add('show');
 }
+
 
 window.addEventListener('load', ()=> fetchWeather('India'));
 </script>
